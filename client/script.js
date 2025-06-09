@@ -1,23 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const events = [
-    {
-      title: "Coldplay Concert",
-      date: "2025-01-20",
-      location: "Mumbai, India",
-    },
-    {
-      title: "Comedy Night",
-      date: "2025-01-25",
-      location: "Delhi, India",
-    },
-    {
-      title: "Art Exhibition",
-      date: "2025-02-10",
-      location: "Bangalore, India",
-    },
-  ];
-
   const eventList = document.querySelector(".event-list");
+  try {
+    const response = await fetch ('https://bookmyshow-841295436259.asia-south1.run.app/events');
+    if (!response.ok) throw new Error('Failed to fetch events');
+   
+    const events = await response.json();
 
   events.forEach(event => {
     const eventCard = document.createElement("div");
@@ -30,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     eventList.appendChild(eventCard);
   });
+  } catch (error) {
+    eventlist.innerHTML = `<p style="color: red;">Error loading events: ${error.message}</p>`;
+}
 });
 
 function bookTicket(eventTitle) {
