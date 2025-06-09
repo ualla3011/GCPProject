@@ -3,18 +3,17 @@ steps:
   - name: "gcr.io/cloud-builders/npm"
     args: ["install"]
     env:
-      - "CI=true" # To ensure Jest runs in CI mode if it has specific CI behavior
+    - "CI=true" # To ensure Jest runs in CI mode if it has specific CI behavior
 
   # Build the container image
   - name: "gcr.io/cloud-builders/docker"
-    args: ['build', '-t', 'gcr.io/my-second-project-458705/express-mysql-todo:latest', '.'] # assuming COMMIT_SHA is a substitution
+    args: ['build', '-t', 'gcr.io/upgradlabs-1746161523784/bookmyshow:latest', '.'] # assuming COMMIT_SHA is a substitution
       
 
   # Push the container image to Google Container Registry (GCR)
-  # You can also use Artifact Registry: asia-south1-docker.pkg.dev/upgradlabs-1746954845644/[REPOSITORY_NAME]/hello-express-service:$COMMIT_SHA
+  # You can also use Artifact Registry: asia-south1-docker.pkg.dev/upgradlabs-1746161523784/[REPOSITORY_NAME]/hello-express-service:$COMMIT_SHA
   - name: "gcr.io/cloud-builders/docker"
-    args:
-      ["push", "gcr.io/my-second-project-458705/express-mysql-todo:latest"]
+    args: ["push", "gcr.io/upgradlabs-1746161523784/bookmyshow:latest"]
 
   # Deploy container image to Cloud Run
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
@@ -22,9 +21,9 @@ steps:
     args: [
         "run",
         "deploy",
-        "express-mysql-todo",
+        "bookmyshow",
         "--image",
-        "gcr.io/my-second-project-458705/express-mysql-todo:latest",
+        "gcr.io/upgradlabs-1746161523784/bookmyshow:latest",
         "--region",
         "asia-south1",
         "--platform",
@@ -33,7 +32,8 @@ steps:
       ]
 
 images:
-  - "gcr.io/upgradlabs-1746954845644/express-mysql-todo:latest"
+  - "gcr.io/upgradlabs-1746161523784/bookmyshow:latest"
 
 options:
   logging: CLOUD_LOGGING_ONLY
+
