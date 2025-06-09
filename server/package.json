@@ -2,7 +2,8 @@
   "name": "bookmyshow",
   "version": "1.0.0",
   "main": "app.js",
-  "scripts": "node app.js"
+  "scripts": {
+    "start": "node app.js"
 },
   "dependencies": {
     "cors": "^2.8.5",
