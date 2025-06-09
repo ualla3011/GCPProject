@@ -2,21 +2,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
-
+const cors = require('cors');
 // Create Express app instance
 const app = express();
 
 // Define the port to listen on
-const PORT = 3000;
+const PORT = 8080;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
+app.use (cors());
 
 // MySQL Database Connection Configuration
 const pool = mysql.createPool({
-  host: 'localhost',     // Your MySQL host (usually 'localhost' or IP)
-  user: 'root',          // MySQL username (default 'root' for local setups)
-  password: '',          // MySQL password (replace with your password)
+  host: '34.58.150.75',     // Your MySQL host (usually 'localhost' or IP)
+  user: 'admin',          // MySQL username (default 'root' for local setups)
+ password: 'project123',          // MySQL password (replace with your password)
   database: 'bookmyshow' // The database you are using
 });
 
